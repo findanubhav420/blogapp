@@ -10,7 +10,6 @@ function Card(props) {
     let clap= "clapping.svg";
 
 
-
     function handleClick() {
         if(liked === "heart-red.svg") {
             setLiked("heart-black.svg");
@@ -25,8 +24,7 @@ function Card(props) {
         }
         else{
             setclaps(clapCount-1);
-        }
-        
+        }       
     }
     return (
         <div className="card">
@@ -45,7 +43,9 @@ function Card(props) {
         </div>
         <div className="icons">
             <div className="icon">
-                <button onClick={handleClap}><img className="icon-image" src={require("../../assets/Icons/"+clap)} alt="like"/></button>
+                <button onClick={handleClap}>
+                    <img className="icon-image" src={require("../../assets/Icons/"+clap)} alt="like"/>
+                </button>
                 <p>{clapCount}</p>
             </div>
             <div className="icon">
