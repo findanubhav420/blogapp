@@ -6,7 +6,6 @@ import Card from "../card/card.js"
 function createCard(card) {
     return (
         <Card
-            key={card.image}
             date={card.date}
             readingTime={card.readingTime}
             title={card.title}
