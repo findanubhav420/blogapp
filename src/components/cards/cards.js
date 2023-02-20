@@ -1,6 +1,6 @@
 import React from "react";
 import "./cards.css";
-import data from "../../mockData/index.json"
+import data from "../../assets/mockData/index.json"
 import Card from "../card/card.js"
 
 function createCard(card) {

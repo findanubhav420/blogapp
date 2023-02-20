@@ -3,6 +3,11 @@
     padding: 0;
 }
 
+button{
+    border: none;
+    background-color: transparent;
+}
+
 .card {
     display: flex;
     flex-direction: column;
