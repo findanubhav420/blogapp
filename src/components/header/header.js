@@ -2,15 +2,15 @@ import React from "react";
 import "./header.css";
 function Header() {
     return (
-        <div class="navbar">
-            <div class="title">
+        <div className="navbar" data-testid="header">
+            <div className="title">
                 <h1>The Artifact</h1>
             </div>
-            <div class="sub-title">
+            <div className="sub-title">
                 <h3>Culture & Art Blog</h3>
             </div>
-            <div class="nav-options">
-                <ul class="nav-links">
+            <div className="nav-options">
+                <ul className="nav-links">
                     <li>Blog</li>
                     <li>About</li>
                     <li>Contact</li>

@@ -1,35 +1,42 @@
 import React , {useState} from "react";
 import "./card.css";
+import makeRequest from "../../utils/makeRequest/index.js";
+import { UPDATE_BLOG_DATA } from "../../constants/apiEndPoints.js";
 
 function Card(props) {
 
     // let liked = props.liked ? "heart-red.svg" : "heart-black.svg";
-    const[liked, setLiked] = useState(props.liked ? "heart-red.svg" : "heart-black.svg");
-    const[clapCount, setclaps] = useState(props.claps);
+    const[like, setLike] = useState(props.liked ? props.redLikeIcon : props.blackLikeIcon);
+    const[clapCount, setClapCount] = useState(props.claps);
 
-    let clap= "clapping.svg";
-
-
-    function handleClick() {
-        if(liked === "heart-red.svg") {
-            setLiked("heart-black.svg");
-        } else {
-            setLiked("heart-red.svg");
+    const handleLike = async () => {
+        try {
+          await makeRequest(UPDATE_BLOG_DATA(props.id), {
+            data: { liked: !props.liked },
+          });
+          if(like === props.blackLikeIcon)
+          setLike(props.redLikeIcon);
+          else
+          setLike(props.blackLikeIcon);
+        } catch (e) {
+          //TODO: Handle error
         }
-    }
+      };
 
-    function handleClap(){
-        if(clapCount === props.claps){
-            setclaps(clapCount+1);
+    const handleClap = async () => {
+        try {
+          await makeRequest(UPDATE_BLOG_DATA(props.id), {
+            data: { claps: clapCount + 1 },
+          });
+          setClapCount(clapCount + 1);
+        } catch (e) {
+          //TODO: Handle error
         }
-        else{
-            setclaps(clapCount-1);
-        }       
-    }
+      };
     return (
-        <div className="card">
+        <div className="card" data-testid="cardPost">
         <div>
-            <img className="card-image" src={require(`../../assets/Images/${props.image}`)} alt=""/>
+            <img className="card-image" src={props.image} alt="pic"/>
         </div>
         <div className="card-content">
             <div className="card-content-top">
@@ -44,13 +51,13 @@ function Card(props) {
         <div className="icons">
             <div className="icon">
                 <button onClick={handleClap}>
-                    <img className="icon-image" src={require("../../assets/Icons/"+clap)} alt="like"/>
+                    <img className="icon-image" data-testid="clap" src={props.blackClapIcon} alt="like"/>
                 </button>
-                <p>{clapCount}</p>
+                <p data-testid="clap-count">{clapCount}</p>
             </div>
             <div className="icon">
-                <button onClick= {handleClick}>
-                    <img className="icon-image" src={require("../../assets/Icons/"+ liked)} alt=""/>
+                <button onClick= {handleLike}>
+                    <img className="icon-image" data-testid="heart" src={like} alt=""/>
                 </button>
             </div>
         </div>
